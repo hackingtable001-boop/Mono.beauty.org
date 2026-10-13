@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Log in — Mono</title>
+<meta name="robots" content="noindex"><meta name="description" content="Log in or create your free Mono account."><link rel="canonical" href="https://mono.beauty/login.html">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Cpath d='M16 7a9 9 0 0 1 0 18z' fill='%23fff'/%3E%3Ccircle cx='12' cy='16' r='2' fill='%23fff'/%3E%3C/svg%3E">
+<script>document.documentElement.dataset.theme=localStorage.getItem('mono-theme')?JSON.parse(localStorage.getItem('mono-theme')):(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#fff;--fg:#000;--mut:#6b6b6b;--ln:#e2e2e2;--card:#f5f5f5;--ease:cubic-bezier(.22,1,.36,1)}
+:root[data-theme=dark]{--bg:#000;--fg:#fff;--mut:#9a9a9a;--ln:#262626;--card:#0e0e0e}
+*{box-sizing:border-box;margin:0}body{background:var(--bg);color:var(--fg);font:16px/1.6 'Space Grotesk',system-ui,sans-serif;transition:background .5s var(--ease),color .5s var(--ease);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button,input{font:inherit;color:inherit}:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.sp{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+.pn{position:relative;background:var(--fg);color:var(--bg);overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:40px 48px}
+.pn canvas{position:absolute;inset:0;width:100%;height:100%}.pn>*:not(canvas){position:relative;z-index:1}
+.br{display:flex;gap:10px;align-items:center;font-size:1.4rem;font-weight:600;letter-spacing:-.03em;width:max-content}
+.qt{max-width:420px;padding:26px;border:1px solid color-mix(in srgb,var(--bg) 28%,transparent);border-radius:22px;background:color-mix(in srgb,var(--fg) 62%,transparent);backdrop-filter:blur(10px)}
+.qt p{font-size:1.25rem;line-height:1.4;letter-spacing:-.01em}.qt small{display:block;margin-top:14px;opacity:.65}
+.rt{display:flex;flex-direction:column;padding:32px 48px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.bk{color:var(--mut);transition:.3s var(--ease)}.bk:hover{color:var(--fg);transform:translateX(-4px)}
+#tg{width:38px;height:38px;border-radius:50%;border:1px solid var(--ln);background:none;cursor:pointer;font-size:1.1rem;transition:.4s var(--ease)}#tg:hover{transform:rotate(180deg);border-color:var(--fg)}
+.bx{width:100%;max-width:400px;margin:auto;padding:32px 0;animation:up .9s var(--ease)}@keyframes up{from{opacity:0;transform:translateY(22px)}}
+.tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--card);border:1px solid var(--ln);border-radius:99px;padding:4px;margin-bottom:36px}
+.tab{position:relative;z-index:1;background:none;border:0;padding:11px;border-radius:99px;cursor:pointer;font-weight:500;color:var(--mut);transition:color .3s}.tab.on{color:var(--fg)}
+#th{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);background:var(--bg);border:1px solid var(--ln);border-radius:99px;box-shadow:0 4px 14px -6px rgba(0,0,0,.25);transition:transform .5s var(--ease)}
+h1{font-size:2.5rem;line-height:1.05;letter-spacing:-.03em;font-weight:600}.sub{color:var(--mut);margin:10px 0 28px}
+.sw{transition:opacity .25s,transform .25s}.sw.o{opacity:0;transform:translateY(6px)}
+.ok2{display:flex;justify-content:space-between;gap:12px;border:1px solid var(--ln);border-radius:14px;padding:12px 16px;margin-bottom:22px;font-size:.92rem;background:var(--card)}.ok2 button{background:none;border:0;text-decoration:underline;cursor:pointer;font-weight:600}
+label{display:block;font-size:.9rem;font-weight:500;margin-bottom:18px}label>span{display:block;margin-bottom:8px}
+.in{position:relative}.in input{width:100%;background:var(--bg);border:1px solid var(--ln);border-radius:14px;padding:14px 16px;transition:border-color .25s,box-shadow .25s}
+.in input:focus{outline:0;border-color:var(--fg);box-shadow:0 0 0 3px color-mix(in srgb,var(--fg) 12%,transparent)}
+.sh{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;color:var(--mut);font-size:.85rem;font-weight:600}.sh:hover{color:var(--fg)}
+.col{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .5s var(--ease),opacity .4s}.col>div{overflow:hidden;min-height:0}
+[data-mode=signup] .su,[data-mode=login] .lg{grid-template-rows:1fr;opacity:1}
+.sg{display:flex;gap:4px;margin:-6px 0 6px}.sg i{flex:1;height:4px;border-radius:4px;background:var(--ln);transition:background .3s}.sg i.on{background:var(--fg)}
+.sl{font-size:.82rem;color:var(--mut);margin-bottom:16px}
+.rw{display:flex;justify-content:space-between;align-items:center;font-size:.92rem;margin-bottom:6px}.rw label{display:flex;align-items:center;gap:10px;margin:0;font-weight:400;color:var(--mut);cursor:pointer}.rw input{accent-color:var(--fg);width:16px;height:16px}
+.rw a{font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.er{min-height:1.5em;font-size:.9rem;font-weight:500;margin:10px 0 14px}
+.go{width:100%;border:1px solid var(--fg);background:var(--fg);color:var(--bg);border-radius:99px;padding:16px;font-weight:600;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}.go:hover{transform:translateY(-2px);box-shadow:0 14px 34px -14px var(--fg)}.go:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none}
+.tm{font-size:.82rem;color:var(--mut);text-align:center;margin-top:16px}.tm a{text-decoration:underline}
+@media(max-width:900px){.sp{grid-template-columns:1fr}.pn{min-height:190px;padding:24px}.qt{display:none}.rt{padding:20px 24px}h1{font-size:2.1rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="sp">
+<aside class="pn" id="pn"><canvas id="cv" aria-hidden="true"></canvas>
+<a class="br" href="index.html" aria-label="Mono home"><svg viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="16" cy="16" r="12"/><path d="M16 4a12 12 0 0 1 0 24z" fill="currentColor" stroke="none"/><circle cx="10" cy="16" r="2.6" fill="currentColor" stroke="none"/></svg>Mono</a>
+<div class="qt"><p>“We dropped three tools in the first week. Everyone just knows where things are now.”</p><small>Amira K. · Product lead, Northwind</small></div></aside>
+<main class="rt"><div class="top"><a class="bk" href="index.html">← Back to home</a><button id="tg" aria-label="Toggle dark mode">◐</button></div>
+<div class="bx"><div id="who"></div>
+<div class="tabs" role="tablist"><span id="th"></span><button class="tab" role="tab" data-m="login" type="button">Log in</button><button class="tab" role="tab" data-m="signup" type="button">Sign up</button></div>
+<div class="sw" id="sw"><h1 id="h"></h1><p class="sub" id="sub"></p></div>
+<form id="f" data-mode="login">
+<div class="col su"><div><label><span>Name</span><div class="in"><input id="nm" name="name" autocomplete="name" placeholder="Your name"></div></label></div></div>
+<label><span>Email</span><div class="in"><input id="em" name="email" type="email" required autocomplete="email" placeholder="you@company.com"></div></label>
+<label style="margin-bottom:10px"><span>Password</span><div class="in"><input id="pw" name="pw" type="password" required placeholder="••••••••" style="padding-right:72px"><button class="sh" id="shw" type="button">Show</button></div></label>
+<div class="col su"><div><div class="sg" id="sg"><i></i><i></i><i></i><i></i></div><div class="sl" id="sl">Use at least 6 characters.</div></div></div>
+<div class="col lg"><div><div class="rw"><label><input type="checkbox" id="rm">Remember me</label><a href="#" id="fg">Forgot password?</a></div></div></div>
+<p class="er" id="er" role="alert"></p>
+<button class="go" id="go">Log in</button>
+<div class="col su"><div><p class="tm">By signing up you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p></div></div>
+</form></div></main></div>
+<script>(()=>{
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const root=document.documentElement,f=$('#f'),er=$('#er'),go=$('#go'),pw=$('#pw'),em=$('#em');
+$('#tg').onclick=()=>{const t=root.dataset.theme==='dark'?'light':'dark';root.dataset.theme=t;ls.set('mono-theme',t);getCol()};
+// tabs
+const T={login:['Welcome back',"Log in to get back to your team's boards.",'Log in'],signup:['Create your account','Free forever. No card needed.','Create account']};
+let mode=location.hash==='#login'?'login':location.hash==='#signup'?'signup':/signin/.test(location.pathname)?'signup':'login',first=true;
+const set=(m,push)=>{const sw=$('#sw'),apply=()=>{mode=m;f.dataset.mode=m;$$('.tab').forEach(b=>{const on=b.dataset.m===m;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});$('#th').style.transform=m==='signup'?'translateX(100%)':'none';$('#h').textContent=T[m][0];$('#sub').textContent=T[m][1];go.textContent=T[m][2];pw.autocomplete=m==='signup'?'new-password':'current-password';$('#nm').required=m==='signup';er.textContent='';sw.classList.remove('o')};
+if(push)try{history.replaceState(null,'',m==='signup'?'#signup':'#login')}catch(e){}
+if(first){first=false;apply()}else{sw.classList.add('o');setTimeout(apply,200)}};
+$$('.tab').forEach(b=>b.onclick=()=>{if(b.dataset.m!==mode)set(b.dataset.m,true)});set(mode);
+if(mode==='login'){const r=ls.get('mono-remember','');if(r){em.value=r;$('#rm').checked=true}}
+// show/hide
+$('#shw').onclick=e=>{const s=pw.type==='password';pw.type=s?'text':'password';e.target.textContent=s?'Hide':'Show'};
+// strength
+pw.addEventListener('input',()=>{const v=pw.value;let s=0;if(v.length>=6)s++;if(v.length>=10)s++;if(/[a-z]/i.test(v)&&/\d/.test(v))s++;if(/[A-Z]/.test(v)&&/[^\w\s]/.test(v))s++;$$('#sg i').forEach((i,k)=>i.classList.toggle('on',k<s));$('#sl').textContent=!v?'Use at least 6 characters.':['Too short','Weak','Okay','Good','Strong'][s]});
+// forgot
+$('#fg').onclick=e=>{e.preventDefault();const v=em.value.trim().toLowerCase();er.textContent=v?'Demo only: no email is sent. A real app would send a reset link to '+v+'.':'Enter your email first, then press Forgot password.'};
+// already logged in
+const u=ls.get('mono-user',null);
+if(u)$('#who').innerHTML='<div class="ok2"><span>Logged in as <b>'+esc(u.name)+'</b></span><button id="out" type="button">Log out</button></div>',$('#out').onclick=()=>{localStorage.removeItem('mono-user');location.reload()};
+// submit
+f.addEventListener('submit',e=>{e.preventDefault();const users=ls.get('mono-users',{}),mail=em.value.trim().toLowerCase(),p=pw.value;
+if(mode==='signup'){const n=$('#nm').value.trim();if(!n){er.textContent='Please enter your name.';return}if(users[mail]){er.textContent='This email already has an account. Try logging in.';return}if(p.length<6){er.textContent='Use a password with at least 6 characters.';return}users[mail]={name:n,pw:p};ls.set('mono-users',users)}
+else if(!users[mail]||users[mail].pw!==p){er.textContent='Email or password is incorrect.';return}
+if(mode==='login'){if($('#rm').checked)ls.set('mono-remember',mail);else localStorage.removeItem('mono-remember')}
+ls.set('mono-user',{name:users[mail].name,email:mail});er.textContent='';go.disabled=true;go.textContent='Welcome ✓';setTimeout(()=>location.href='index.html',800)});
+// pattern
+const cv=$('#cv'),x=cv.getContext('2d'),pn=$('#pn'),still=matchMedia('(prefers-reduced-motion:reduce)').matches,dpr=Math.min(devicePixelRatio||1,2),g=26;
+let W,H,ox,oy,mx=null,col='#fff';
+const getCol=()=>col=getComputedStyle(root).getPropertyValue('--bg').trim()||'#fff';
+const size=()=>{const r=pn.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);if(ox==null){ox=W*.3;oy=H*.7}getCol()};
+const draw=t=>{x.clearRect(0,0,W,H);if(mx){ox+=(mx[0]-ox)*.06;oy+=(mx[1]-oy)*.06}x.fillStyle=col;const R=Math.max(W,H)*.9;
+for(let i=g/2;i<W;i+=g)for(let j=g/2;j<H;j+=g){const d=Math.hypot(i-ox,j-oy),w=Math.max(0,Math.sin(d/34-t/700));x.globalAlpha=.22+.78*w;x.beginPath();x.arc(i,j,.9+5.2*w*w*w*Math.exp(-d/R),0,6.283);x.fill()}
+x.globalAlpha=1;if(!still)requestAnimationFrame(draw)};
+size();addEventListener('resize',size);pn.addEventListener('pointermove',e=>{const r=pn.getBoundingClientRect();mx=[e.clientX-r.left,e.clientY-r.top]});
+requestAnimationFrame(draw);
+})();</script></body></html>
